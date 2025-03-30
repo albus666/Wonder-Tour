@@ -1,0 +1,159 @@
+app:
+  description: 用于出行旅游规划
+  icon: grinning
+  icon_background: '#FFEAD5'
+  mode: agent-chat
+  name: 大旅行家
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/volcengine_maas:0.0.9@89e719fd718aaf97165b1833202e8db8a4e553cf7291291cc376e4b50245f1cd
+kind: app
+model_config:
+  agent_mode:
+    enabled: true
+    max_iteration: 5
+    prompt: null
+    strategy: function_call
+    tools:
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: 3bc91f6d-3213-46f4-8422-065fe8d5ba70
+      provider_name: 地点详情
+      provider_type: workflow
+      tool_label: 地点详情
+      tool_name: place_v2_detail
+      tool_parameters:
+        uid: ''
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: 73142f77-870e-4468-94c5-810895358fa1
+      provider_name: 地点检索
+      provider_type: workflow
+      tool_label: 地点检索
+      tool_name: place_v2_search
+      tool_parameters:
+        query: ''
+        region: ''
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: 507be6a9-6968-4c46-abb2-21730fbaf11e
+      provider_name: 地理坐标编码
+      provider_type: workflow
+      tool_label: 地理坐标编码
+      tool_name: get_zuobiao
+      tool_parameters:
+        address: ''
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: 27e03b42-4230-4aad-9733-b9ea167fd020
+      provider_name: 路线规划
+      provider_type: workflow
+      tool_label: 路线规划
+      tool_name: directionlite_v1
+      tool_parameters:
+        destination: ''
+        origin: ''
+        travel_mode: ''
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: ceb1eed6-2e9d-4993-97eb-3e90a0bfdce1
+      provider_name: ip定位
+      provider_type: workflow
+      tool_label: ip定位
+      tool_name: location_ip
+      tool_parameters: {}
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: 34ad669b-9104-4e2e-b221-054a940f11fb
+      provider_name: 天气查询
+      provider_type: workflow
+      tool_label: 天气查询
+      tool_name: weather
+      tool_parameters:
+        location: ''
+  annotation_reply:
+    enabled: false
+  chat_prompt_config: {}
+  completion_prompt_config: {}
+  dataset_configs:
+    datasets:
+      datasets: []
+    reranking_enable: false
+    retrieval_model: multiple
+    top_k: 4
+  dataset_query_variable: ''
+  external_data_tools: []
+  file_upload:
+    allowed_file_extensions:
+    - .JPG
+    - .JPEG
+    - .PNG
+    - .GIF
+    - .WEBP
+    - .SVG
+    - .MP4
+    - .MOV
+    - .MPEG
+    - .MPGA
+    allowed_file_types: []
+    allowed_file_upload_methods:
+    - remote_url
+    - local_file
+    enabled: false
+    image:
+      detail: high
+      enabled: false
+      number_limits: 3
+      transfer_methods:
+      - remote_url
+      - local_file
+    number_limits: 3
+  model:
+    completion_params:
+      stop: []
+    mode: chat
+    name: Doubao-1.5-pro-32k
+    provider: langgenius/volcengine_maas/volcengine_maas
+  more_like_this:
+    enabled: false
+  opening_statement: ''
+  pre_prompt: "# 旅游规划助手提示词\n首先要确定起点和终点的坐标，才能发起路线规划。\n你是一个专业的旅游规划助手，擅长利用地图工具规划一日游行程。当用户提出旅游需求时，请按照以下步骤操作：\n\
+    \n## 能力说明\n1. 能根据用户位置和需求规划合理的旅游路线\n2. 能查询景点信息、路线导航和周边美食\n3. 能合理安排时间并考虑交通方式以及当时的天气状况\n\
+    4. 能为用户提供详细的行程安排和备选方案\n\n## 工具调用策略\n1. 首先使用`location_ip`或让用户提供位置信息确定出发点\n2. 使用`place_v2_search`搜索赏花地点（关键词可包括\"\
+    公园\"、\"花园\"、\"赏花\"等）\n3. 使用`geocoder_v2`将地点名称转换为坐标（如需要）\n4. 使用`directionlite_v1`规划路线（考虑交通方式和时间）\n\
+    5. 使用`place_v2_search`搜索沿途餐厅（如用户指定的烤鸭店）\n6. 使用`routematrix_v2_driving`计算地点间距离和耗时\n\
+    7. 使用`weather_v1`查询天气情况（如需要）\n\n## 响应要求\n1. 行程安排必须包含：\n   - 明确的时间节点（如8:00-9:00）\n\
+    \   - 每个地点的停留时间建议\n   - 交通方式和预计耗时\n   - 午餐安排\n2. 提供2-3个赏花地点，确保路线合理\n3. 考虑用户出发时间和总时长限制\n\
+    4. 输出格式：\n   \"\"\"\n   **一日赏花行程规划**\n   \n   **出发地点**：[用户位置]\n   **出发时间**：[用户指定时间]\n\
+    \   \n   **上午行程**：\n   - [时间] 从[地点]出发前往[第一个赏花地点]\n   - [时间] 到达[地点]，建议游玩[时长]\n\
+    \   （简要介绍景点特色）\n   \n   **午餐安排**：\n   - [时间] 前往[餐厅名称]（[菜系]，预计耗时）\n   \n   **下午行程**：\n\
+    \   - [时间] 前往[第二个赏花地点]\n   - [时间] 返回[出发地点]（可选）\n   \n   **备选方案**：[如有]\n   \"\"\
+    \"\n\n## 注意事项\n1. 确保景点开放时间与用户行程匹配\n2. 合理安排交通时间，避免太赶\n3. 提供1-2个备选方案以防突发情况\n4. 如遇天气问题可调整行程（调用天气API）\n\
+    5. 对每个推荐地点提供简短特色描述"
+  prompt_type: simple
+  retriever_resource:
+    enabled: true
+  sensitive_word_avoidance:
+    configs: []
+    enabled: false
+    type: ''
+  speech_to_text:
+    enabled: false
+  suggested_questions: []
+  suggested_questions_after_answer:
+    enabled: false
+  text_to_speech:
+    enabled: false
+    language: ''
+    voice: ''
+  user_input_form: []
+version: 0.1.5

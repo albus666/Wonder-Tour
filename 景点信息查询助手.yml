@@ -1,0 +1,1207 @@
+app:
+  description: 用于处理用户询问景点以及相关内容
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: 景点信息查询助手
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.0.14@d333909fe8d75a335b44da4b878d5120779b8703f12c21cf4730135d6864afbb
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: template-transform
+        targetType: llm
+      id: 1742648640620-source-1742648540194-target
+      source: '1742648640620'
+      sourceHandle: source
+      target: '1742648540194'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 1742648540194-source-1742647437324-target
+      source: '1742648540194'
+      sourceHandle: source
+      target: '1742647437324'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 17427422601360-source-1742742270034-target
+      source: '17427422601360'
+      sourceHandle: source
+      target: '1742742270034'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1742745909032'
+        sourceType: iteration-start
+        targetType: code
+      id: 1742745909032start-source-1742745922568-target
+      source: 1742745909032start
+      sourceHandle: source
+      target: '1742745922568'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInLoop: false
+        sourceType: iteration
+        targetType: template-transform
+      id: 1742745909032-source-1742745468189-target
+      source: '1742745909032'
+      sourceHandle: source
+      target: '1742745468189'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: template-transform
+        targetType: end
+      id: 1742745468189-source-1742745417323-target
+      source: '1742745468189'
+      sourceHandle: source
+      target: '1742745417323'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 1742895657263-fail-branch-17427422601360-target
+      selected: false
+      source: '1742895657263'
+      sourceHandle: fail-branch
+      target: '17427422601360'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: question-classifier
+      id: 1742642596090-source-1742971822317-target
+      source: '1742642596090'
+      sourceHandle: source
+      target: '1742971822317'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1742971822317-2-17427422601360-target
+      selected: false
+      source: '1742971822317'
+      sourceHandle: '2'
+      target: '17427422601360'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: code
+      id: 1742971822317-1-1742895657263-target
+      source: '1742971822317'
+      sourceHandle: '1'
+      target: '1742895657263'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: http-request
+      id: 1742895657263-source-1742969896689-target
+      source: '1742895657263'
+      sourceHandle: source
+      target: '1742969896689'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: http-request
+        targetType: if-else
+      id: 1742969896689-source-1742743085244-target
+      source: '1742969896689'
+      sourceHandle: source
+      target: '1742743085244'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: iteration
+      id: 1742743085244-true-1742745909032-target
+      source: '1742743085244'
+      sourceHandle: 'true'
+      target: '1742745909032'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1742743085244-false-17427422601360-target
+      source: '1742743085244'
+      sourceHandle: 'false'
+      target: '17427422601360'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: http-request
+        targetType: llm
+      id: 1742969896689-fail-branch-17427422601360-target
+      source: '1742969896689'
+      sourceHandle: fail-branch
+      target: '17427422601360'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1743145179759'
+        sourceType: iteration-start
+        targetType: code
+      id: 1743145179759start-source-1743145201728-target
+      source: 1743145179759start
+      sourceHandle: source
+      target: '1743145201728'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: iteration
+      id: 1742743085244-a3b9a45f-119e-48f3-86f8-1ad0fba1bde7-1743145179759-target
+      source: '1742743085244'
+      sourceHandle: a3b9a45f-119e-48f3-86f8-1ad0fba1bde7
+      target: '1743145179759'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1743145179759'
+        sourceType: code
+        targetType: code
+      id: 1743145201728-source-1743145790208-target
+      source: '1743145201728'
+      sourceHandle: source
+      target: '1743145790208'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1743145179759'
+        sourceType: code
+        targetType: code
+      id: 1743145201728-source-1743145890624-target
+      source: '1743145201728'
+      sourceHandle: source
+      target: '1743145890624'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInLoop: false
+        sourceType: iteration
+        targetType: template-transform
+      id: 1743145179759-source-1742648640620-target
+      source: '1743145179759'
+      sourceHandle: source
+      target: '1742648640620'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1743145179759'
+        sourceType: code
+        targetType: template-transform
+      id: 1743145790208-source-1743146801950-target
+      source: '1743145790208'
+      sourceHandle: source
+      target: '1743146801950'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1743145179759'
+        sourceType: code
+        targetType: template-transform
+      id: 1743145890624-source-1743146801950-target
+      source: '1743145890624'
+      sourceHandle: source
+      target: '1743146801950'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: 用户输入
+          max_length: 100
+          options: []
+          required: true
+          type: paragraph
+          variable: input
+      height: 89
+      id: '1742642596090'
+      position:
+        x: 30
+        y: 285.5
+      positionAbsolute:
+        x: 30
+        y: 285.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1742648540194'
+          - text
+          variable: output
+        selected: false
+        title: 结束
+        type: end
+      height: 89
+      id: '1742647437324'
+      position:
+        x: 3214
+        y: 887.5
+      positionAbsolute:
+        x: 3214
+        y: 887.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1742648640620'
+          - output
+        desc: ''
+        model:
+          completion_params: {}
+          mode: chat
+          name: deepseek-r1
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 74511e79-9bf2-441c-aff6-e19f68f53302
+          role: system
+          text: '{{#context#}}根据上下文，以及{{#1742969896689.body#}}问题类别，分析评论'
+        - id: fa16faa2-774c-47cc-bf80-453e9932a590
+          role: user
+          text: '{{#context#}}根据上下文，以及{{#1742969896689.body#}}问题类别，分析评论
+
+            '
+        - id: 94e89314-2368-455b-b357-28e37ab5d6cf
+          role: assistant
+          text: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 1000
+        selected: true
+        title: 景区信息分析
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 115
+      id: '1742648540194'
+      position:
+        x: 2910
+        y: 874.5
+      positionAbsolute:
+        x: 2910
+        y: 874.5
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        selected: false
+        template: '{{ info }}'
+        title: 模板转换
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1743145179759'
+          - output
+          variable: info
+      height: 53
+      id: '1742648640620'
+      position:
+        x: 2606
+        y: 887.5
+      positionAbsolute:
+        x: 2606
+        y: 887.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1742642596090'
+          - input
+        desc: ''
+        model:
+          completion_params: {}
+          mode: chat
+          name: deepseek-v3
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - edition_type: basic
+          id: 5900c04b-26e1-4b40-80f3-4b364c668c78
+          role: system
+          text: '{{#context#}}
+
+            # 角色
+
+            你是旅游小助手，只提供旅游相关的内容，不涉及生活的方面，如天气温度等内容
+
+
+            # 规则
+
+            根据用户输入，当用户输入的内容与旅游助手功能无关时，需向用户发出提示，并对其输入内容进行简要分析后生成回复。
+
+            或者如果是因为输入只是简单的询问，可以提醒用户可以输入大概目标以便进行分析'
+        selected: false
+        title: 错误信息分析
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 89
+      id: '17427422601360'
+      position:
+        x: 1926
+        y: 689.5
+      positionAbsolute:
+        x: 1926
+        y: 689.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '17427422601360'
+          - text
+          variable: text
+        selected: false
+        title: 意外退出
+        type: end
+      height: 89
+      id: '1742742270034'
+      position:
+        x: 2606
+        y: 642.5
+      positionAbsolute:
+        x: 2606
+        y: 642.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: not empty
+            id: ac278538-6423-4406-a363-0472ee48840e
+            value: ''
+            varType: array[string]
+            variable_selector:
+            - '1742895657263'
+            - keywords
+          - comparison_operator: is
+            id: f7f99427-5359-446c-8347-3bdb8bcea01c
+            value: '"景点推荐"'
+            varType: string
+            variable_selector:
+            - '1742969896689'
+            - body
+          id: 'true'
+          logical_operator: and
+        - case_id: a3b9a45f-119e-48f3-86f8-1ad0fba1bde7
+          conditions:
+          - comparison_operator: not empty
+            id: 6803632d-a05a-48f0-b894-c3dd4cdd3ee0
+            value: ''
+            varType: array[string]
+            variable_selector:
+            - '1742895657263'
+            - keywords
+          - comparison_operator: is not
+            id: 3b956632-0e48-49f1-abd0-c865d53da98e
+            value: '"景点推荐"'
+            varType: string
+            variable_selector:
+            - '1742969896689'
+            - body
+          id: a3b9a45f-119e-48f3-86f8-1ad0fba1bde7
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 工作分流
+        type: if-else
+      height: 225
+      id: '1742743085244'
+      position:
+        x: 1246
+        y: 502.5
+      positionAbsolute:
+        x: 1246
+        y: 502.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1742745468189'
+          - output
+          variable: text
+        selected: false
+        title: 景点推荐
+        type: end
+      height: 89
+      id: '1742745417323'
+      position:
+        x: 2910
+        y: 502.5
+      positionAbsolute:
+        x: 2910
+        y: 502.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        selected: false
+        template: "{# ================== 循环体 ================== #}\r\n{% macro attraction_card(card)\
+          \ -%}\r\n## {{ card.poiName }}\r\n{% if card.zoneName %}### 区域：{{ card.zoneName\
+          \ }}{% endif %}\r\n{% if card.sightLevelStr %}\U0001F3C5 等级：{{ card.sightLevelStr\
+          \ }}{% endif %}\r\n⭐ 评分：{{ card.commentScore }}（基于{{ card.commentCount }}条评价）\r\
+          \n\r\n{# --------------------- 标签信息 --------------------- #}\r\n{% if card.tagNameList\
+          \ or card.otherTagList %}\r\n### 标签分类：\r\n  \U0001F3F7️ 主标签：{{ card.tagNameList\
+          \ | join('、') }}\r\n  \U0001F3F7️ 服务标签：{% for tag in card.otherTagList %}{{\
+          \ tag.name }}{% if not loop.last %} | {% endif %}{% endfor %}\r\n{% endif\
+          \ %}\r\n\r\n{# --------------------- 价格信息 --------------------- #}\r\n###\
+          \ 门票价格：\r\n{% if card.isFree %}\r\n   \U0001F193 免费开放（{{ card.priceTypeDesc\
+          \ }}）\r\n{% else %}\r\n{% if card.priceType|default('') == '' or card.price|default('')\
+          \ == '' %}\r\n  未知\r\n{% else %}\r\n{% if card.price == card.marketPrice\
+          \ or card.preferentialPrice == 0 %}\r\n  \U0001F4B5  ¥{{ card.marketPrice\
+          \ }}\r\n{% else %}\r\n  \U0001F4B5  ~~¥{{ card.marketPrice }}~~ ➔ ¥{{ card.price\
+          \ }}（{{ card.preferentialDesc }}）\r\n{% endif %}\r\n{% endif %}\r\n{% endif\
+          \ %}\r\n\r\n\r\n{# --------------------- 扩展信息 --------------------- #}\r\
+          \n{% if card.shortFeatures %}\r\n### 特色亮点：\r\n  {% for feat in card.shortFeatures\
+          \ %}\r\n  ▶ {{ feat }}{% if not loop.last %}\\n    {% endif %}{% endfor\
+          \ %}\r\n{% endif %}\r\n### 排行榜：{{ card.sightCategoryInfo | default(\"未上榜\"\
+          ) }}\r\n\r\n{%- endmacro %}\r\n\r\n{# ===================== 主循环 =====================\
+          \ #}\r\n{% for item in attractionList %}\r\n{{ attraction_card(item.card)\
+          \ }}\r\n{% if not loop.last %}══════════════════════════════{% endif %}\r\
+          \n{% endfor %}"
+        title: 模板转换
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1742745909032'
+          - output
+          variable: attractionList
+      height: 53
+      id: '1742745468189'
+      position:
+        x: 2606
+        y: 502.5
+      positionAbsolute:
+        x: 2606
+        y: 502.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        error_handle_mode: continue-on-error
+        is_parallel: false
+        iterator_selector:
+        - '1742895657263'
+        - keywords
+        output_selector:
+        - '1742745922568'
+        - attractionList
+        output_type: array[object]
+        parallel_nums: 10
+        selected: false
+        start_node_id: 1742745909032start
+        title: 旅游推荐
+        type: iteration
+        width: 388
+      height: 147
+      id: '1742745909032'
+      position:
+        x: 1854
+        y: 502.5
+      positionAbsolute:
+        x: 1854
+        y: 502.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 388
+      zIndex: 1
+    - data:
+        desc: ''
+        isInIteration: true
+        selected: false
+        title: ''
+        type: iteration-start
+      draggable: false
+      height: 48
+      id: 1742745909032start
+      parentId: '1742745909032'
+      position:
+        x: 24
+        y: 68
+      positionAbsolute:
+        x: 1878
+        y: 570.5
+      selectable: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-iteration-start
+      width: 44
+      zIndex: 1002
+    - data:
+        code: "import requests\n\n\ndef get_district_id(cityName: str):\n    url =\
+          \ \"https://m.ctrip.com/restapi/soa2/30668/search\"\n\n    querystring =\
+          \ {\n        \"action\": \"online\",\n        \"source\": \"globalonline\"\
+          ,\n        \"keyword\": cityName\n    }\n\n    payload = \"\"\n    headers\
+          \ = {\n        \"Content-Type\": \"application/x-www-form-urlencoded\",\n\
+          \        \"User-Agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36\
+          \ (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0\",\n\
+          \        \"Accept\": \"*/*\",\n        \"Accept-Encoding\": \"gzip, deflate,\
+          \ br\",\n        \"Connection\": \"keep-alive\",\n        \"Cookie\": \"\
+          GUID=09031022317999445208\",\n        \"Host\": \"m.ctrip.com\",\n     \
+          \   \"Content-Length\": \"0\"\n    }\n\n    response = requests.request(\"\
+          POST\", url, data=payload, headers=headers, params=querystring)\n\n    try:\n\
+          \        response.raise_for_status()\n    except requests.exceptions.HTTPError\
+          \ as e:\n        return e\n\n    result = response.json()\n\n    # print(result['data'][0])\n\
+          \    districtId = result['data'][0]['id']\n\n    return districtId\n\n\n\
+          def main(cityName: str):\n    districtId = int(get_district_id(cityName))\n\
+          \    url = \"https://m.ctrip.com/restapi/soa2/18109/json/getAttractionList\"\
+          \n\n    querystring = {\"_fxpcqlniredt\": \"09031162419158778138\", \"x-traceID\"\
+          : \"09031162419158778138-1742713344797-6843463\"}\n\n    payload = {\n \
+          \       \"head\": {\n            \"cid\": \"09031162419158778138\",\n  \
+          \          \"ctok\": \"\",\n            \"cver\": \"1.0\",\n           \
+          \ \"lang\": \"01\",\n            \"sid\": \"8888\",\n            \"syscode\"\
+          : \"999\",\n            \"auth\": \"\",\n            \"xsid\": \"\",\n \
+          \           \"extension\": []\n        },\n        \"scene\": \"online\"\
+          ,\n        \"districtId\": districtId,\n        \"index\": 1,\n        \"\
+          sortType\": 1,\n        \"count\": 10,\n        \"filter\": {},\n      \
+          \  \"returnModuleType\": \"all\"\n    }\n    headers = {\n        \"Content-Type\"\
+          : \"application/json\",\n        \"Cookie\": \"GUID=09031136319238214458\"\
+          ,\n        \"Cookieorigin\": \"https://you.ctrip.com\",\n        \"Accept\"\
+          : \"*/*\",\n        \"Accept-Encoding\": \"gzip, deflate, br, zstd\",\n\
+          \        \"User-Agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36\
+          \ (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0\",\n\
+          \        \"Connection\": \"keep-alive\"\n    }\n\n    response = requests.request(\"\
+          POST\", url, json=payload, headers=headers, params=querystring)\n    attractionList\
+          \ = response.json()[\"attractionList\"]\n    return {'attractionList': attractionList}\n"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1742745909032'
+        outputs:
+          attractionList:
+            children: null
+            type: array[object]
+        selected: false
+        title: 信息检索
+        type: code
+        variables:
+        - value_selector:
+          - '1742745909032'
+          - item
+          variable: cityName
+      height: 53
+      id: '1742745922568'
+      parentId: '1742745909032'
+      position:
+        x: 124.26906901444522
+        y: 68
+      positionAbsolute:
+        x: 1978.2690690144452
+        y: 570.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "import requests\n\n\ndef main(text: str):\n    url = \"http://www.atopes.xyz:4399/get_keyword\"\
+          \n\n    querystring = {\n        \"text\": text\n    }\n\n    payload =\
+          \ \"\"\n    headers = {\n        \"Accept\": \"*/*\",\n        \"Accept-Encoding\"\
+          : \"gzip, deflate, br\",\n        \"User-Agent\": \"PostmanRuntime-ApipostRuntime/1.1.0\"\
+          ,\n        \"Connection\": \"keep-alive\",\n        \"Content-Type\": \"\
+          application/json;charset=UTF-8\",\n    }\n\n    response = requests.request(\"\
+          GET\", url, data=payload, headers=headers, params=querystring)\n\n    keywords\
+          \ = response.json()\n\n    return {\n        'keywords': keywords\n    }\n"
+        code_language: python3
+        desc: ''
+        error_strategy: fail-branch
+        outputs:
+          keywords:
+            children: null
+            type: array[string]
+        selected: false
+        title: 地点提取
+        type: code
+        variables:
+        - value_selector:
+          - '1742642596090'
+          - input
+          variable: text
+      height: 89
+      id: '1742895657263'
+      position:
+        x: 638
+        y: 360
+      positionAbsolute:
+        x: 638
+        y: 360
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data: []
+          type: none
+        desc: ''
+        error_strategy: fail-branch
+        headers: ''
+        method: get
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: 具体意图分类
+        type: http-request
+        url: http://www.atopes.xyz:4399/classify?text={{#1742642596090.input#}}
+        variables: []
+      height: 190
+      id: '1742969896689'
+      position:
+        x: 940.7563563381484
+        y: 502.5
+      positionAbsolute:
+        x: 940.7563563381484
+        y: 502.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        classes:
+        - id: '1'
+          name: 景点旅游相关
+        - id: '2'
+          name: 景点旅游无关
+        desc: ''
+        instruction: '# 角色(Role)
+
+          你是一名信息分类专家，擅长准确判断用户输入信息与景点之间的关联，性格沉稳、认真负责，专注于分析每一个输入内容。
+
+
+          # 功能(Skills)
+
+          ## 功能1(Skill 1)：意图区分
+
+          - 准确判断用户输入的内容是与景点相关还是与景点无关。
+
+          - 如果是关于景点信息外的询问则归为景点无关，例如天气温度等等，只支持景点评价，位置，内容等信息
+
+
+          # 限制(Constraint)
+
+          - 只能给出“景点相关”或“景点无关”这两种判断结果。
+
+          - 不能对用户输入进行其他额外解读或评论。
+
+
+          # 输出(Output)
+
+          - 输出内容为“景点相关”或“景点无关”。
+
+
+          # 格式(Format)
+
+          - 输出简洁明了，无多余修饰。
+
+
+          # 检查(Check)
+
+          - 检查判断结果是否符合输入内容的真实意图。
+
+
+          # 示例(Example)
+
+          - 输入：明天郑州天气怎么样
+
+          - 输出：景点旅游无关
+
+
+          # 要求(Claim)
+
+          - 输出语言为中文。
+
+          - 判断结果必须清晰明确。 '
+        instructions: ''
+        model:
+          completion_params:
+            response_format: text
+          mode: chat
+          name: deepseek-v3
+          provider: langgenius/tongyi/tongyi
+        query_variable_selector:
+        - '1742642596090'
+        - input
+        selected: false
+        title: 意图分析
+        topics: []
+        type: question-classifier
+        vision:
+          enabled: false
+      height: 171
+      id: '1742971822317'
+      position:
+        x: 334
+        y: 285.5
+      positionAbsolute:
+        x: 334
+        y: 285.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        error_handle_mode: continue-on-error
+        height: 285
+        is_parallel: true
+        iterator_selector:
+        - '1742895657263'
+        - keywords
+        output_selector:
+        - '1743146801950'
+        - output
+        output_type: array[string]
+        parallel_nums: 10
+        selected: false
+        start_node_id: 1743145179759start
+        title: 用户评论
+        type: iteration
+        width: 996
+      height: 285
+      id: '1743145179759'
+      position:
+        x: 1550
+        y: 817.0714285714286
+      positionAbsolute:
+        x: 1550
+        y: 817.0714285714286
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 996
+      zIndex: 1
+    - data:
+        desc: ''
+        isInIteration: true
+        selected: false
+        title: ''
+        type: iteration-start
+      draggable: false
+      height: 48
+      id: 1743145179759start
+      parentId: '1743145179759'
+      position:
+        x: 24
+        y: 68
+      positionAbsolute:
+        x: 1574
+        y: 885.0714285714286
+      selectable: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-iteration-start
+      width: 44
+      zIndex: 1002
+    - data:
+        code: "import json\nimport requests\n\n\ndef find_sight_data(data):\n    \"\
+          \"\"在data数组中查找type为sight的有效数据\"\"\"\n    for item in data:\n        if isinstance(item,\
+          \ dict) and item.get('type') == 'sight':\n            required_fields =\
+          \ ['districtName', 'districtId', 'productId']\n            if all(item.get(field)\
+          \ for field in required_fields):\n                return item\n    return\
+          \ None\n\n\ndef main(keyword: str):\n    url = \"https://m.ctrip.com/restapi/soa2/30668/search\"\
+          \n\n    querystring = {\n        \"action\": \"globalonline\",\n       \
+          \ \"source\": \"globalonline\",\n        \"keyword\": keyword\n    }\n\n\
+          \    payload = \"\"\n    headers = {\n        \"Content-Type\": \"application/x-www-form-urlencoded\"\
+          ,\n        \"User-Agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36\
+          \ (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0\",\n\
+          \        \"Accept\": \"*/*\",\n        \"Accept-Encoding\": \"gzip, deflate,\
+          \ br\",\n        \"Connection\": \"keep-alive\",\n        \"Cookie\": \"\
+          GUID=09031022317999445208\",\n        \"Host\": \"m.ctrip.com\",\n     \
+          \   \"Content-Length\": \"0\"\n    }\n\n    try:\n        response = requests.request(\"\
+          POST\", url, data=payload, headers=headers, params=querystring)\n      \
+          \  response.raise_for_status()\n\n        result = response.json()\n   \
+          \     print(result['data'][0])\n        sight_data = find_sight_data(result.get('data',\
+          \ []))\n\n        if not sight_data:\n            print(\"未找到有效的景区数据\")\n\
+          \            return None\n\n        # 生成拼音部分\n        district_name = sight_data['eName']\
+          \ if sight_data['eName'] else sight_data['districtName']\n        district_id\
+          \ = sight_data['districtId']\n        product_id = sight_data['productId']\n\
+          \n        # 查找额外信息\n        poi_id = str(sight_data['poiId'])\n\n      \
+          \  # 拼接URL\n        ctrip_url = f\"https://you.ctrip.com/sight/{district_name}{district_id}/{product_id}.html\"\
+          \n\n        search_result = {\n            'url': ctrip_url,\n         \
+          \   'poi_id': poi_id,\n        }\n        return search_result\n\n    except\
+          \ requests.exceptions.RequestException as e:\n        print(f\"请求失败: {str(e)}\"\
+          )\n    except json.JSONDecodeError:\n        print(\"响应数据解析失败\")\n    except\
+          \ Exception as e:\n        print(f\"处理异常: {str(e)}\")\n    return None"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1743145179759'
+        outputs:
+          poi_id:
+            children: null
+            type: string
+          url:
+            children: null
+            type: string
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 1000
+        selected: false
+        title: 景区URL获取
+        type: code
+        variables:
+        - value_selector:
+          - '1743145179759'
+          - item
+          variable: keyword
+      height: 79
+      id: '1743145201728'
+      parentId: '1743145179759'
+      position:
+        x: 128
+        y: 68
+      positionAbsolute:
+        x: 1678
+        y: 885.0714285714286
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "import json\nimport re\nimport requests\n\ndef main(url):\n    headers\
+          \ = {\n        \"User-Agent\": \"PostmanRuntime-ApipostRuntime/1.1.0\",\n\
+          \        \"Cookie\": \"_pd=%7B%22_o%22%3A70%2C%22s%22%3A1030%2C%22_s%22%3A9%7D;GUID=09031167317991829446\"\
+          \n    }\n\n    response = requests.get(url, headers=headers)\n    if response.status_code\
+          \ != 200:\n        return {'result_code': response.status_code, 'info':\
+          \ {}}\n\n    # Part 1: 使用正则提取JSON数据\n    script_pattern = re.compile(r'<script\
+          \ id=\"__NEXT_DATA__\".*?>(.*?)</script>', re.DOTALL)\n    script_match\
+          \ = script_pattern.search(response.text)\n    \n    if not script_match:\n\
+          \        return {'result_code': 404, 'info': {}}\n\n    json_data = json.loads(script_match.group(1))\n\
+          \    poi_data = json_data[\"props\"][\"pageProps\"][\"initialState\"][\"\
+          poiDetail\"]\n    \n    # Part 2: 使用正则提取标签数据\n    hot_tags_section = re.search(r'<div\
+          \ class=\"hotTags\".*?>(.*?)</div>', response.text, re.DOTALL)\n    if not\
+          \ hot_tags_section:\n        return {'result_code': 404, 'info': {}}\n\n\
+          \    span_pattern = re.compile(r'<span.*?>(.*?)</span>')\n    spans = span_pattern.findall(hot_tags_section.group(1))\n\
+          \n    def extract_number(text):\n        return int(re.search(r'\\d+', text).group())\
+          \ if re.search(r'\\d+', text) else 0\n\n    return {\n        'info': {\n\
+          \            'poi_id': int(poi_data[\"poiId\"]),\n            'poi_name':\
+          \ str(poi_data[\"poiName\"]),\n            'comment_score': float(poi_data[\"\
+          commentScore\"]),\n            'review_count': extract_number(spans[0])\
+          \ if len(spans) >=1 else 0,\n            'positive': extract_number(spans[1])\
+          \ if len(spans) >=2 else 0,\n            'negative': extract_number(spans[3])\
+          \ if len(spans) >=4 else 0\n        }\n    }"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1743145179759'
+        outputs:
+          info:
+            children: null
+            type: object
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 1000
+        selected: false
+        title: 景区INFO获取
+        type: code
+        variables:
+        - value_selector:
+          - '1743145201728'
+          - url
+          variable: url
+      height: 79
+      id: '1743145790208'
+      parentId: '1743145179759'
+      position:
+        x: 432
+        y: 68
+      positionAbsolute:
+        x: 1982
+        y: 885.0714285714286
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "import requests\nimport time\n\nimport uuid\n\n\ndef main(poi_id: int):\n\
+          \    url = \"https://m.ctrip.com/restapi/soa2/13444/json/getCommentCollapseList\"\
+          \n\n    user_contents = []\n\n    # 循环1到10页\n    for page_index in range(1,\
+          \ 4):\n        try:\n            payload = {\n                \"arg\": {\n\
+          \                    \"channelType\": 2,\n                    \"collapseType\"\
+          : 0,\n                    \"commentTagId\": 0,\n                    \"pageIndex\"\
+          : page_index,  # 动态页码\n                    \"pageSize\": 10,\n         \
+          \           \"poiId\": poi_id,\n                    \"sourceType\": 1,\n\
+          \                    \"sortType\": 3,\n                    \"starType\"\
+          : 0,\n                    \"head\": {\n                        \"cid\":\
+          \ str(uuid.uuid4())[:32],  # 建议动态生成设备ID\n                        \"ctok\"\
+          : \"\",\n                        \"cver\": \"1.0\",\n                  \
+          \      \"lang\": \"01\",\n                        \"sid\": \"8888\",\n \
+          \                       \"syscode\": \"09\",\n                        \"\
+          auth\": \"\",\n                        \"xsid\": \"\",\n               \
+          \         \"extension\": []\n                    }\n                }\n\
+          \            }\n\n            headers = {\n                \"User-Agent\"\
+          : \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36...\",\n\
+          \                \"Content-Type\": \"application/json\",\n             \
+          \   \"Cookie\": f\"GUID={str(uuid.uuid4()).replace('-', '')[:32]}\"  # 动态Cookie\n\
+          \            }\n\n            response = requests.request(\"Post\", url,\
+          \ json=payload, headers=headers)\n\n            # 增加状态码检查\n            if\
+          \ response.status_code != 200:\n                print(f\"第{page_index}页请求失败，状态码：{response.status_code}\"\
+          )\n                continue\n\n            data = response.json()\n\n  \
+          \          # 处理分页终止条件\n            if not data.get('result', {}).get('items'):\n\
+          \                print(f\"第{page_index}页无数据，停止爬取\")\n                break\n\
+          \n            # 提取评论内容\n            user_contents.extend(\n            \
+          \    [item['content'] for item in data['result']['items']]\n           \
+          \ )\n\n            # 添加随机延迟防止封禁\n            time.sleep(1.5 + (page_index\
+          \ % 3) * 0.5)\n\n        except Exception as e:\n            print(f\"第{page_index}页抓取异常：{str(e)}\"\
+          )\n            continue\n\n    return {\n        'result': {\n         \
+          \   'user_contents': user_contents\n        }\n    }\n"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1743145179759'
+        outputs:
+          result:
+            children: null
+            type: object
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 1000
+        selected: false
+        title: 景区COMMENTS获取
+        type: code
+        variables:
+        - value_selector:
+          - '1743145201728'
+          - poi_id
+          variable: poi_id
+      height: 79
+      id: '1743145890624'
+      parentId: '1743145179759'
+      position:
+        x: 432
+        y: 186
+      positionAbsolute:
+        x: 1982
+        y: 1003.0714285714286
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        desc: ''
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1743145179759'
+        selected: false
+        template: "{\r\n    \"sight\": {{ sight }},\r\n    \"info\": {{ info }},\r\
+          \n    \"user_contents\": {{ result }}\r\n}"
+        title: 模板转换 3
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1743145790208'
+          - info
+          variable: info
+        - value_selector:
+          - '1743145890624'
+          - result
+          variable: result
+        - value_selector:
+          - '1743145179759'
+          - item
+          variable: sight
+      height: 53
+      id: '1743146801950'
+      parentId: '1743145179759'
+      position:
+        x: 733.1428571428573
+        y: 127.71428571428578
+      positionAbsolute:
+        x: 2283.1428571428573
+        y: 944.7857142857143
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    viewport:
+      x: -798.8639703016117
+      y: -132.25755599622494
+      zoom: 0.7000000000000002
